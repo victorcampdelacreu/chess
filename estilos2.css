@@ -1,0 +1,193 @@
+.body {
+    /* background-image: url('https://www.quien.net/wp-content/uploads/Chess.jpg');  */
+    background-image: url('img/Chess.jpg');  /*misma imagen pero buscada en fichero img que eta en cine/docs */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh; /*para que ocupe todo el alto y ancho de la pantalla*/
+}
+
+h2 {
+    margin-bottom: 25px;
+    /*Alinear texto al centro*/
+    /*text-align: center;*/
+}
+
+h2 a {
+    color: black;
+    /* elimina la linea de abajo de los enlaces */
+    text-decoration: none;
+    /* Tamaño de letras */
+    font-size: 16px;
+}
+
+h1 {
+    color: white;
+    text-decoration: none;
+    /* Tamaño de letras */
+    font-size: 16px;
+}
+
+.cajas:hover {
+    background-color: blue;
+    cursor: pointer;
+}
+
+.cajas h2 a:hover {
+    color: white;
+}
+
+.cajas {
+    /* Color de fondo */
+    background-color: rgb(183, 239, 247);
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 250px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    height: 35px;
+}
+
+.cajas h2 {
+    line-height: 1;
+}
+
+.cajasMenu a {
+    font-size: 18px;
+}
+
+.cajasMenu {
+    float: left;
+    margin-right: 50px;
+    text-align: center;
+}
+
+.cajasMenu-2 {
+    float: left;
+    margin-right: 50px;
+    text-align: left;
+}
+
+.cajas2 {
+    background-color: blueviolet;
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 250px;
+    margin-bottom: 15px;
+    margin-right: 20px;
+    height: 35px;
+    position: absolute;
+    margin-top: 40%; /* posiciona a la altura que queremos*/
+    text-align: center;
+}
+
+.cajas2:hover {
+    background-color: green;
+    cursor: pointer;
+}
+
+.cajas2 h2 a:hover {
+    color: white;
+}
+
+.contenedorImagen {
+    width: 100%;
+}
+
+.tabla2 {
+    width: 80%;
+    text-align: left;
+    border: 2px solid black;
+}
+
+.texto{
+    font-size: 30px;
+}
+
+
+
+.tablero1 {
+    background-color:chartreuse;
+    color:white;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    font-size: 20px;
+}
+.tablero1:hover {
+    background-color:blue;
+    cursor: pointer;
+}
+.tablero2 {
+    background-color:burlywood;
+    color:white;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    font-size: 20px;
+}
+.tablero2:hover {
+    background-color:blue;
+    cursor: pointer;
+}
+
+.tablero3 {
+    background-color:burlywood;
+    color:black;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.tablero3:hover {
+    background-color:blue;
+    cursor: pointer;
+}
+
+.tablero2 a,.tablero4 a{
+    color:black !important;
+}
+.tablero1 a,.tablero3 a{
+    color:white !important;
+}
+
+.tablero4 {
+    background-color:burlywood;
+    color:black !important;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    font-size: 20px;
+}
+.tablero4:hover {
+    background-color:blue;
+    cursor: pointer;
+}
+
+.tablero5 {
+    background-color:white;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.tablero6 {
+    background-color:coral;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    font-size: 20px;
+}
+.celda{
+    background-color: bisque;
+    color: black;
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    font-size: 18px;
+    text-align: center;
+}
