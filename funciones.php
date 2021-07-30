@@ -173,5 +173,3 @@ function nombre_filas($j)
 return $result;
 }
 //***************************************************** */
-
-echo "Hola";
