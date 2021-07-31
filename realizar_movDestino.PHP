@@ -16,10 +16,14 @@
 
         // este programa trae la posicion de salida de la pieza
         $n=$_GET['n'];
-        $jugada_id=$_GET['jugada_id'];
+        $id=$_GET['jugada_id'];
+        $jugada= datos_jugada($id);
+        $jugada_id= $jugada['id'];
+        $posInicial = $jugada['posInicial'];
+        $pieza_id= $jugada['pieza_id'];
+        $p=$pieza_id; // guardo la pieza para modificar posicion final
+        $posFinal= $n;
 
-        echo $n,'-',$jugada_id;
-        echo die;
         
         // verificar legalidad movimiento
 
@@ -31,7 +35,29 @@
 
 
 
-
+        //modificar_jugada($jugada_id,$posInicial,$posFinal,$pieza_id);
+        echo $jugada_id,'--',$posInicial,'-',$posFinal,'-',$pieza_id;
+        
+        //modificar posicion salida (quitar la pieza)
+        $posicion_id= $posInicial;
+        $marca=0;
+        $id=$posicion_id;
+        $posicion=buscar_posicion($id);
+        $fila=$posicion['fila'];
+        $columna=$posicion['columna'];
+        $pieza_id=0;
+        modificar_posicion($posicion_id,$pieza_id,$fila,$columna,$marca);
+        
+        
+        //modificar posicion llegada (poner pieza)
+        $posicion_id= $posFinal;
+        $id=$posicion_id;
+        $posicion=buscar_posicion($id);
+        $fila=$posicion['fila'];
+        $columna=$posicion['columna'];
+        $pieza_id=$p;
+        modificar_posicion($posicion_id,$pieza_id,$fila,$columna,$marca);
+        
 
            
         // vuelve a movimientos

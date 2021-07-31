@@ -21,6 +21,8 @@
 
        // tabla para mostrar las posiciones y las piezas en ellas
        echo "<table>";
+       $titulo = 'Destino jugada';
+        echo "<td class= 'cajas'>".$titulo.'</td>';
 
        for($n=1;$n<65;$n++){
            $id=$n;
@@ -37,7 +39,7 @@
                       
            }
            else{
-               $nj=' ';
+               $nj='.';
                $color='blanco';
            }
            // pone en data la posicion destino y la jugada para transferir
@@ -112,17 +114,6 @@
            }
     
        echo "</table>";
-        
-
-           
-
-
-
-
-
-
-
-
 
 
 
@@ -131,7 +122,7 @@
    
     <div class="cajas">
         <h2>
-            <a class="enlaces" href="realizar_movimiento">Realizar movimiento</a>
+            <a class="enlaces" href="en_juego.php">Ir a Juego</a>
         </h2>
     </div>
 </body>

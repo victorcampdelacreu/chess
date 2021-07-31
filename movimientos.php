@@ -17,6 +17,8 @@
        $jugada= listar_jugadas();
        // tabla para mostrar las posiciones y las piezas en ellas
        echo "<table>";
+        $titulo = 'Inicio jugada';
+        echo "<td class= 'cajas'>".$titulo.'</td>';
 
        for($n=1;$n<65;$n++){
            $id=$n;
@@ -128,7 +130,7 @@
    
     <div class="cajas">
         <h2>
-            <a class="enlaces" href="realizar_movimiento">Realizar movimiento</a>
+            <a class="enlaces" href="en_juego.php">Ir a juego</a>
         </h2>
     </div>
 </body>

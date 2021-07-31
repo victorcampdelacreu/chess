@@ -122,7 +122,7 @@ function listar_jugadas()
 
 
 function modificar_jugada($jugada_id,$posInicial,$posFinal,$pieza_id){
-    $sql = "UPDATE posicion SET posInicial=$posInicial,posFinal=$posFinal,pieza_id=$pieza_id WHERE id= $jugada_id";
+    $sql = "UPDATE jugadas SET posInicial=$posInicial,posFinal=$posFinal,pieza_id=$pieza_id WHERE id= $jugada_id";
     mysqli_query(OpenCon(), $sql);
     return true;
 }
@@ -140,6 +140,14 @@ function ultima_jugada_id(){
     $result = mysqli_query(OpenCon(), $query);
     $res = mysqli_fetch_array($result);
     return $res; 
+}
+
+function datos_jugada($id) // se utiliza en movDestino
+{
+    $query = "SELECT * FROM jugadas WHERE id ='$id'";
+    $result = mysqli_query(OpenCon(), $query);
+    $res = mysqli_fetch_array($result);
+    return $res;
 }
 
 //**************************************************** */
