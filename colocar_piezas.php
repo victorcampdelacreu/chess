@@ -58,7 +58,7 @@
         $posicion['id']=$id;       
         
         modificar_posicion($posicion['id'],$pieza_id,$fila,$columna,$marca);
-        // echo 'posicion ',$posicion['id'],' pieza ',$pieza_id; //control
+        //cho 'posicion ',$posicion['id'],' pieza ',$pieza_id; //control
         }
         
         

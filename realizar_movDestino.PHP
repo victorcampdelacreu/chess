@@ -47,7 +47,7 @@
         $columna=$posicion['columna'];
         $pieza_id=0;
         modificar_posicion($posicion_id,$pieza_id,$fila,$columna,$marca);
-        
+        echo $posicion_id,'-',$pieza_id,'-',$fila,'-',$columna,'---';
         
         //modificar posicion llegada (poner pieza)
         $posicion_id= $posFinal;
@@ -57,7 +57,7 @@
         $columna=$posicion['columna'];
         $pieza_id=$p;
         modificar_posicion($posicion_id,$pieza_id,$fila,$columna,$marca);
-        
+        echo $posicion_id,'-',$pieza_id,'-',$fila,'-',$columna,'---';
 
            
         // vuelve a movimientos

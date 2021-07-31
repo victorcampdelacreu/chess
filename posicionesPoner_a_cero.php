@@ -27,8 +27,7 @@
             $i= $pos['fila'];
             $pieza_id=0; 
             $marca=0;
-            
-            echo $id,'-',$pieza_id,'-',$i,'-',$j,'-',$marca,'---';
+          
 
             modificar_posicion($id,$pieza_id,$i,$j,$marca);   
             

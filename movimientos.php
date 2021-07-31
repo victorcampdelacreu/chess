@@ -18,7 +18,7 @@
        // tabla para mostrar las posiciones y las piezas en ellas
        echo "<table>";
         $titulo = 'Inicio jugada';
-        echo "<td class= 'cajas'>".$titulo.'</td>';
+        //echo "<td class= 'cajas'>".$titulo.'</td>';
 
        for($n=1;$n<65;$n++){
            $id=$n;
