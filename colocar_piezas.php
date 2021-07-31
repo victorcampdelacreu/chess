@@ -47,7 +47,7 @@
         $p=strpos($A,$columna)+1;
         $resto=$fila%8;
         if($resto==0){
-            $posicion_id=$columna;
+            $posicion_id=$p;
         }
         else{
         $posicion_id=$p+(8*(8-$resto));
@@ -58,7 +58,7 @@
         $posicion['id']=$id;       
         
         modificar_posicion($posicion['id'],$pieza_id,$fila,$columna,$marca);
-        //cho 'posicion ',$posicion['id'],' pieza ',$pieza_id; //control
+        
         }
         
         

@@ -36,17 +36,16 @@
                 $nj=' ';
                 $color='blanco';
             }
-            
-       
+            if(($n%8-1)==0){
+                echo "<tr>";
+                echo "<td class= 'tablero5'>".$i .'</td>';
+            }
             //SI LA FICHA ES BLANCA 
             if($color=='blanco' || $color=='blanca'){
                 $A='abcdefgh';
                 $p=strpos($A,$j)+1;
                
-                if(($n%8-1)==0){
-                    echo "<tr>";
-                    echo "<td class= 'tablero5'>".$i .'</td>';
-                }
+                
                 if (($p+$i)%2==1){                   
                     echo "<td class= 'tablero1'>".$nj .'</td>';   
                 }
@@ -60,9 +59,7 @@
                 $A='abcdefgh';
                 $p=strpos($A,$j)+1;
                
-                if(($n%8-1)==0){
-                    echo "<tr>";
-                }
+                
                 if (($p+$i)%2==1){                   
                     echo "<td class= 'tablero3'>".$nj .'</td>';   
                 }
@@ -72,7 +69,7 @@
             }
         
         }
-        $B=' ';
+            $B=' ';
             echo "<tr>";
             echo "<td class= 'tablero5'>".$B .'</td>';
             for($n=1;$n<9;$n++){
