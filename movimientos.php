@@ -41,7 +41,10 @@
            // pone en data los datos a transferir
            $data = "n=$n&pieza_id=$pieza_id";
 
-           
+           if(($n%8-1)==0){
+            echo "<tr>";
+            echo "<td class= 'tablero5'>".$i.'</td>'; 
+        }
           
            // *****************************************************
            // SI LA FICHA ES BLANCA 
@@ -49,10 +52,7 @@
                $A='abcdefgh';
                $p=strpos($A,$j)+1;
               
-               if(($n%8-1)==0){
-                   echo "<tr>";
-                   echo "<td class= 'tablero5'>".$i.'</td>'; 
-               }
+              
                if (($p+$i)%2==1){                   
                    echo "<td class= 'tablero1'><a href='realizar_movSalida.php?$data'>".$nj ."</a></td>";
                }
@@ -64,9 +64,7 @@
                $A='abcdefgh';
                $p=strpos($A,$j)+1;
               
-               if(($n%8-1)==0){
-                   echo "<tr>";
-               }
+               
                if (($p+$i)%2==1){                   
                    echo "<td class= 'tablero3'><a href='realizar_movSalida.php?$data'>".$nj ."</a></td>";
                }

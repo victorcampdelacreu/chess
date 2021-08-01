@@ -36,6 +36,14 @@ function buscar_pieza($id)
     return $res;
 }
 
+function ver_pieza($id)
+{
+    $query = "select * FROM piezas where id =$id";
+    $result = mysqli_query(OpenCon(), $query);
+    $res = mysqli_fetch_array($result);
+    return $res;
+}
+
 //***************************************************** */
 function insertar_posicion($pieza_id, $fila,$columna,$marca)
 {
@@ -181,3 +189,68 @@ function nombre_filas($j)
 return $result;
 }
 //***************************************************** */
+function verificar_torre($Fi,$Fd,$Ci,$Cd)
+{
+    $error=0;
+    $error2=0;
+
+if($Fi!=$Fd && $Ci!=$Cd){
+       $error=1;    
+}
+
+if($error==0){
+if($Fi==$Fd){
+    $Fk=$Fi;  // Fk es la fila
+    if($Ci+1>$Cd){
+        for($Ck=$Ci+1;$Ck<$Cd-1;$Ck++){
+            $error2= mira_pieza($Fk,$Ck);
+        }
+    }
+    if($Ci<$Cd+1){
+        for($Ck=$Cd+1;$Ck<$Ci-1;$Ck++){
+            $error2=mira_pieza($Fk,$Ck);
+        }
+
+    }
+}
+if($Ci==$Cd){
+    $Ck=$Ci;  // Ck es la columna
+    if($Fi+1>$Fd){
+        for($Fk=$Fi+1;$Fk<$Fd-1;$Fk++){
+           $error2= mira_pieza($Fk,$Ck);
+        }
+    }
+    if($Fi<$Fd+1){
+        for($Fk=$Fd+1;$Fk<$Fi-1;$Fk++){
+            $error2=mira_pieza($Fk,$Ck);
+        }
+    }
+}
+}
+$error= $error+$error2;
+return $error;
+}
+
+function mira_pieza($Fk,$Ck){
+    $error2=0;
+    $id=($Fk-8)*8+$Ck;
+    $posicion_ficha=buscar_posicion($id);
+    $pieza_id=$posicion_ficha['$pieza_id'];
+    if ($pieza_id !=0){
+        $error2=1;
+       
+    }
+return $error2;
+    
+}
+
+    
+
+
+
+
+
+
+
+
+
