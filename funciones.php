@@ -82,7 +82,6 @@ function buscar_posicion($id)
     return $res;
 }
 
-
 function modificar_posicion($posicion_id,$pieza_id,$fila,$columna,$marca){
     $sql = "UPDATE posicion SET pieza_id=$pieza_id, fila=$fila,columna='$columna',marca=$marca WHERE id= $posicion_id";
     mysqli_query(OpenCon(), $sql);
@@ -158,91 +157,251 @@ function datos_jugada($id) // se utiliza en movDestino
     return $res;
 }
 
-//**************************************************** */
-function nombre_filas($j)
-{
-    if($j==1){
-        $nj='a';
-    }
-    if($j==2){
-        $nj='b';
-    }
-    if($j==3){
-        $nj='c';
-    }
-    if($j==4){
-        $nj='d';
-    }
-    if($j==5){
-        $nj='e';
-    }
-    if($j==6){
-        $nj='f';
-    }
-    if($j==7){
-        $nj='g';
-    }
-    if($j==8){
-        $nj='h';
-    }
-    $result = $nj;
-return $result;
-}
 //***************************************************** */
 function verificar_torre($Fi,$Fd,$Ci,$Cd)
 {
     $error=0;
     $error2=0;
+    $error3=0;
 
 if($Fi!=$Fd && $Ci!=$Cd){
        $error=1;    
 }
 
 if($error==0){
-if($Fi==$Fd){
+if($Fi==$Fd){ //si estan en la misma fila mira si hay una pieza en las columnas del medio
     $Fk=$Fi;  // Fk es la fila
-    if($Ci+1>$Cd){
-        for($Ck=$Ci+1;$Ck<$Cd-1;$Ck++){
+    if($Ci+1<$Cd){
+        for($Ck=$Ci+1;$Ck<$Cd;$Ck++){
             $error2= mira_pieza($Fk,$Ck);
+            $error3=$error3+$error2;
         }
     }
-    if($Ci<$Cd+1){
-        for($Ck=$Cd+1;$Ck<$Ci-1;$Ck++){
+    if($Ci>$Cd+1){
+        for($Ck=$Cd+1;$Ck<$Ci;$Ck++){
             $error2=mira_pieza($Fk,$Ck);
+            $error3=$error3+$error2;
         }
 
     }
 }
-if($Ci==$Cd){
+if($Ci==$Cd){ //si estan en la misma colunma mira si hay una pieza en las filas del medio
     $Ck=$Ci;  // Ck es la columna
-    if($Fi+1>$Fd){
-        for($Fk=$Fi+1;$Fk<$Fd-1;$Fk++){
+    if($Fi+1<$Fd){
+        for($Fk=$Fi+1;$Fk<$Fd;$Fk++){
            $error2= mira_pieza($Fk,$Ck);
+           $error3=$error3+$error2;
         }
     }
-    if($Fi<$Fd+1){
-        for($Fk=$Fd+1;$Fk<$Fi-1;$Fk++){
+    if($Fi>$Fd+1){
+        for($Fk=$Fd+1;$Fk<$Fi;$Fk++){
             $error2=mira_pieza($Fk,$Ck);
+            $error3=$error3+$error2;
         }
     }
 }
 }
-$error= $error+$error2;
+
+$error= $error+$error3;
 return $error;
 }
-
-function mira_pieza($Fk,$Ck){
+// ***********************************************************************
+function mira_pieza($Fk,$Ck){ //mira si hay una pieza en la posicion
     $error2=0;
-    $id=($Fk-8)*8+$Ck;
-    $posicion_ficha=buscar_posicion($id);
-    $pieza_id=$posicion_ficha['$pieza_id'];
-    if ($pieza_id !=0){
+    
+    
+    $pos=((8-$Fk)*8)+$Ck;
+        
+    $posicion=buscar_posicion($pos);
+    $pieza_id=$posicion['pieza_id'];
+    
+    
+    if ($pieza_id != 0){
         $error2=1;
+        echo $Fk,'-',$Ck,'-',$pieza_id,'-',$error2;
+        //echo die;
        
     }
+    
 return $error2;
     
 }
+//************************************************************************
+
+function verificar_caballo($Fi,$Fd,$Ci,$Cd)
+{
+    
+    $error=1;
+  
+if($Fd==$Fi+2 && $Cd==$Ci+1){
+    $error=0;
+}
+if($Fd==$Fi+2 && $Cd==$Ci-1){
+    $error=0;
+}
+if($Fd==$Fi-2 && $Cd==$Ci+1){
+    $error=0;
+}
+if($Fd==$Fi-2 && $Cd==$Ci-1){
+    $error=0;
+}
+if($Fd==$Fi+1 && $Cd==$Ci+2){
+    $error=0;
+}
+if($Fd==$Fi+1 && $Cd==$Ci-2){
+    $error=0;
+}
+if($Fd==$Fi-1 && $Cd==$Ci+2){
+    $error=0;
+}
+if($Fd==$Fi-1 && $Cd==$Ci-2){
+    $error=0;
+}
+return $error;
+}
+//******************************************************** */
+function verificar_alfil($Fi,$Fd,$Ci,$Cd)
+{
+    $error=0;
+    $error2=0;
+    $error3=0;
+    $Fk=$Fi;
+    
+    if(abs($Ci-$Cd)!=abs($Fi-$Fd)){
+        $error=1;
+    }
+    // mira si hay una pieza en las columnas del medio
+     
+    if(($Ci+1<$Cd)&&($Fi+1<$Fd)){
+        for($Ck=$Ci+1;$Ck<$Cd;$Ck++){
+            $Fk=$Fk+1;
+            $error2 = mira_pieza($Fk,$Ck);
+            $error3=$error3+$error2;
+        }
+        
+    }
+
+    if(($Ci+1<$Cd)&&($Fi-1>$Fd)){
+        for($Ck=$Ci+1;$Ck<$Cd;$Ck++){
+                $Fk=$Fk-1;
+                $error2 = mira_pieza($Fk,$Ck);
+                $error3=$error3+$error2;
+            }
+
+    }
+    
+    if(($Ci-1>$Cd)&&($Fi+1<$Fd)){
+        for($Ck=$Ci-1;$Ck>$Cd;$Ck--){
+            $Fk=$Fk+1;
+            $error2 = mira_pieza($Fk,$Ck);
+            $error3=$error3+$error2;
+        }
+        
+    }
+  
+    if(($Ci-1>$Cd)&&($Fi-1>$Fd)){
+        for($Ck=$Ci-1;$Ck>$Cd;$Ck--){
+                $Fk=$Fk-1;
+                $error2 = mira_pieza($Fk,$Ck);
+                $error3=$error3+$error2;
+            }
+
+    }
+    
+
+    $error= $error+$error3;
+    return $error;
+
+}
+//*************************************************************** */
+function verificar_dama($Fi,$Fd,$Ci,$Cd){
+    $error=0;
+    $error2=0;
+    $error3=0;
+//verifica movimiento
+if($Fi!=$Fd && $Ci!=$Cd){
+    if(abs($Ci-$Cd)!=abs($Fi-$Fd)){
+        $error=1;
+    }    
+}
+if($error==0){
+    if($Fi==$Fd){ //si estan en la misma fila mira si hay una pieza en las columnas del medio
+        $Fk=$Fi;  // Fk es la fila
+        if($Ci+1<$Cd){
+            for($Ck=$Ci+1;$Ck<$Cd;$Ck++){
+                $error2= mira_pieza($Fk,$Ck);
+                $error3=$error3+$error2;
+            }
+        }
+        if($Ci>$Cd+1){
+            for($Ck=$Cd+1;$Ck<$Ci;$Ck++){
+                $error2=mira_pieza($Fk,$Ck);
+                $error3=$error3+$error2;
+            }
+    
+        }
+    }
+    if($Ci==$Cd){ //si estan en la misma colunma mira si hay una pieza en las filas del medio
+        $Ck=$Ci;  // Ck es la columna
+        if($Fi+1<$Fd){
+            for($Fk=$Fi+1;$Fk<$Fd;$Fk++){
+               $error2= mira_pieza($Fk,$Ck);
+               $error3=$error3+$error2;
+            }
+        }
+        if($Fi>$Fd+1){
+            for($Fk=$Fd+1;$Fk<$Fi;$Fk++){
+                $error2=mira_pieza($Fk,$Ck);
+                $error3=$error3+$error2;
+            }
+        }
+    }
+
+    // verifica diagonales
+    $Fk=$Fi;  // Fk es la fila
+    if(($Ci+1<$Cd)&&($Fi+1<$Fd)){
+        
+        for($Ck=$Ci+1;$Ck<$Cd;$Ck++){
+            $Fk=$Fk+1;
+            $error2 = mira_pieza($Fk,$Ck);
+            $error3=$error3+$error2;
+        }
+        
+    }
+
+    if(($Ci+1<$Cd)&&($Fi-1>$Fd)){
+        for($Ck=$Ci+1;$Ck<$Cd;$Ck++){
+                $Fk=$Fk-1;
+                $error2 = mira_pieza($Fk,$Ck);
+                $error3=$error3+$error2;
+            }
+
+    }
+    
+    if(($Ci-1>$Cd)&&($Fi+1<$Fd)){
+        for($Ck=$Ci-1;$Ck>$Cd;$Ck--){
+            $Fk=$Fk+1;
+            $error2 = mira_pieza($Fk,$Ck);
+            $error3=$error3+$error2;
+        }
+        
+    }
+  
+    if(($Ci-1>$Cd)&&($Fi-1>$Fd)){
+        for($Ck=$Ci-1;$Ck>$Cd;$Ck--){
+                $Fk=$Fk-1;
+                $error2 = mira_pieza($Fk,$Ck);
+                $error3=$error3+$error2;
+            }
+
+    }
+}
+$error= $error+$error3;
+    return $error;
+
+}
+
+//********************************************************** */
 
     
 
