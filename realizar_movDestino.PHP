@@ -69,14 +69,12 @@
             }
             if ($nomPieza=='Alfil'){
                 $error = verificar_alfil($Fi,$Fd,$Ci,$Cd);
-                //echo $pieza_id,'-',$Fi,'-',$Ci,'--',$Fd,'-',$Cd,'---',$error;
-                //echo die;
             }
             if ($nomPieza=='Dama'){
                 $error = verificar_dama($Fi,$Fd,$Ci,$Cd);
             }
-            if ($nomPieza=='rey'){
-                //verificar rey
+            if ($nomPieza=='rey'){ // no se controla si hay jaque
+                $error= verificar_rey($Fi,$Fd,$Ci,$Cd);
             }
             if ($nomPieza=='peon'){
                 //verificar peon

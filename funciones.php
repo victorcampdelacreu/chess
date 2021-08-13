@@ -402,10 +402,22 @@ $error= $error+$error3;
 }
 
 //********************************************************** */
+function verificar_rey($Fi,$Fd,$Ci,$Cd){
+    $error1=0;
+    $error2=0;
+    $p=0;
+    if(abs($Fi-$Fd)>1 || abs($Ci-$Cd)>1){
+        $error=1;
+    }
 
-    
+    // no es necesario comprobar si hay pieza propia en destino
+    // porque ya se ha verificado en realizar_movDestini.php de
+    //donde se ha lanzado a funciones
 
+    return $error;
 
+}
+// *****************************************************
 
 
 

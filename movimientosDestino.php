@@ -17,12 +17,20 @@
        $jugada= listar_jugadas();
 
         $jugada_id= $_GET['id'];
-        
+        ?>   
 
        // tabla para mostrar las posiciones y las piezas en ellas
-       echo "<table>";
-       $titulo = 'Destino jugada';
-        echo "<td class= 'cajas'>".$titulo.'</td>';
+       <div class="container">
+
+        <div class="cajas">
+            <h2>
+                <a class="enlaces" href="#">Inicio jugada</a>
+            </h2>
+        </div>
+
+        <div class="tablero">
+            <?php
+            echo "<table>";
 
        for($n=1;$n<65;$n++){
            $id=$n;
@@ -117,8 +125,8 @@
 
 
 
-?>
-
+    ?>
+    </div>
    
     <div class="cajas">
         <h2>
