@@ -43,7 +43,16 @@ function ver_pieza($id)
     $res = mysqli_fetch_array($result);
     return $res;
 }
-
+function mira_pieza($Fk,$Ck){ //mira si hay una pieza en la posicion
+    $error2=0;    
+    $pos=((8-$Fk)*8)+$Ck;      
+    $posicion=buscar_posicion($pos);
+    $pieza_id=$posicion['pieza_id'];  
+    if ($pieza_id != 0){
+        $error2=1;      
+    }  
+return $error2;    
+}
 //***************************************************** */
 function insertar_posicion($pieza_id, $fila,$columna,$marca)
 {
@@ -206,28 +215,6 @@ $error= $error+$error3;
 return $error;
 }
 // ***********************************************************************
-function mira_pieza($Fk,$Ck){ //mira si hay una pieza en la posicion
-    $error2=0;
-    
-    
-    $pos=((8-$Fk)*8)+$Ck;
-        
-    $posicion=buscar_posicion($pos);
-    $pieza_id=$posicion['pieza_id'];
-    
-    
-    if ($pieza_id != 0){
-        $error2=1;
-        echo $Fk,'-',$Ck,'-',$pieza_id,'-',$error2;
-        //echo die;
-       
-    }
-    
-return $error2;
-    
-}
-//************************************************************************
-
 function verificar_caballo($Fi,$Fd,$Ci,$Cd)
 {
     
@@ -315,16 +302,16 @@ function verificar_alfil($Fi,$Fd,$Ci,$Cd)
 }
 //*************************************************************** */
 function verificar_dama($Fi,$Fd,$Ci,$Cd){
-    $error=0;
+    $error1=0;
     $error2=0;
     $error3=0;
 //verifica movimiento
 if($Fi!=$Fd && $Ci!=$Cd){
     if(abs($Ci-$Cd)!=abs($Fi-$Fd)){
-        $error=1;
+        $error1=1;
     }    
 }
-if($error==0){
+if($error1==0){
     if($Fi==$Fd){ //si estan en la misma fila mira si hay una pieza en las columnas del medio
         $Fk=$Fi;  // Fk es la fila
         if($Ci+1<$Cd){
@@ -396,22 +383,22 @@ if($error==0){
 
     }
 }
-$error= $error+$error3;
+$error= $error1+$error2+$error3;
     return $error;
 
 }
 
 //********************************************************** */
 function verificar_rey($Fi,$Fd,$Ci,$Cd){
-    $error1=0;
-    $error2=0;
-    $p=0;
+    $error=0;
+    
+   
     if(abs($Fi-$Fd)>1 || abs($Ci-$Cd)>1){
         $error=1;
     }
 
     // no es necesario comprobar si hay pieza propia en destino
-    // porque ya se ha verificado en realizar_movDestini.php de
+    // porque ya se ha verificado en realizar_movDestino.php de
     //donde se ha lanzado a funciones
 
     return $error;
@@ -419,6 +406,117 @@ function verificar_rey($Fi,$Fd,$Ci,$Cd){
 }
 // *****************************************************
 
+function verificar_peonBlanco($Fi,$Fd,$Ci,$Cd){
+    
+    $error1=0;
+    $error2=0;
+    $p=0;
+    if($Fd>$Fi){
+    if ($Ci==$Cd){ // si estan en la misma columna
+        if ($Fi>2){ // verifica que no avanza mas de 1 si no esta en posicion fila 2
+            if($Fd>$Fi+1){
+                $error1=1;
+            }
+        }
+        if ($Fi==2){
+            if($Fd>$Fi+2){ //verifica que no avanza mas de 2
+                $error1=1;    
+            }   
+            $error2=mira_pieza($Fi+1,$Ci);//verifica que no hay pieza en fila 3
+        }
+        
+    }
+    // -------------------------
+    else{// no estan en la misma columna
+    
+    if (abs($Cd-$Ci)>1){ //verifica que no esté a mas de 1 columna
+        $error1=1;
+        echo 'estan a mas de una columna   ';
+    }
+    // estan a 1 columna, ha de ver si mata al contrario
+    if($Fd-$Fi!=1){ //mira si no estan a 1 fila de distancia
+        $error1=1;
+        echo ' estan a 1 columna pero misma fila ';
+    }
+    else{//estan a una columna y una fila (posible mate pieza>)
+        $p=mira_pieza($Fd,$Cd);
+        if($p==0){ //Si no hay pieza contraria movimiento ilegal
+            $error2=1;
+            echo 'estan en posicion de matar pero no hay pieza ';
+        }
+
+
+    }
+    }
+}
+else{
+    $error1=1;
+}
+    $error=$error1+$error2;
+       
+    // no es necesario comprobar si hay pieza propia en destino
+    // porque ya se ha verificado en realizar_movDestino.php de
+    //donde se ha lanzado a funciones
+
+return $error;
+
+}
+// **********************************************************/
+function verificar_peonNegro($Fi,$Fd,$Ci,$Cd){
+    $error1=0;
+    $error2=0;
+    $p=0;
+    if($Fd<$Fi){
+    if ($Ci==$Cd){ // si estan en la misma columna
+        if ($Fi<7){ // verifica que no avanza mas de 1 si no esta en posicion fila 2
+            if($Fd<$Fi-1){
+                $error1=1;
+            }
+        }
+        if ($Fi==7){
+            if($Fd<5){ //verifica que no avanza mas de 2
+                $error1=1;    
+            }   
+            $error2=mira_pieza($Fi-1,$Ci);//verifica que no hay pieza en fila 6
+        }
+        
+    }
+    // -------------------------
+    else{// no estan en la misma columna
+        if (abs($Cd-$Ci)>1){ //verifica que no esté a mas de 1 columna
+            $error1=1;
+            echo 'estan a mas de una columna   ';
+        }
+        // estan a 1 columna, ha de ver si mata al contrario
+        if($Fi-$Fd!=1){ //mira si no estan a 1 fila de distancia
+            $error1=1;
+            echo ' estan a 1 columna pero misma fila ';
+        }
+        else{//estan a una columna y una fila (posible mate pieza>)
+            $p=mira_pieza($Fd,$Cd);
+            if($p==0){ //Si no hay pieza contraria movimiento ilegal
+                $error2=1;
+                echo 'estan en posicion de matar pero no hay pieza ';
+            }
+        }
+
+    }
+}
+else{
+    
+    
+    
+    $error1=1;
+}
+    $error=$error1+$error2;
+     
+    // no es necesario comprobar si hay pieza propia en destino
+    // porque ya se ha verificado en realizar_movDestino.php de
+    //donde se ha lanzado a funciones
+
+return $error;
+
+}
 
 
 

@@ -19,7 +19,7 @@
         $jugada_id= $_GET['id'];
         ?>   
 
-       // tabla para mostrar las posiciones y las piezas en ellas
+       <!--tabla para mostrar las posiciones y las piezas en ellas-->
        <div class="container">
 
         <div class="cajas">

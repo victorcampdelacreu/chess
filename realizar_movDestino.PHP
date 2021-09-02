@@ -73,16 +73,23 @@
             if ($nomPieza=='Dama'){
                 $error = verificar_dama($Fi,$Fd,$Ci,$Cd);
             }
-            if ($nomPieza=='rey'){ // no se controla si hay jaque
+            if ($nomPieza=='Rey'){ // no se controla si hay jaque
                 $error= verificar_rey($Fi,$Fd,$Ci,$Cd);
             }
-            if ($nomPieza=='peon'){
-                //verificar peon
+            if ($nomPieza=='Peon'){
+                if($color=='blanco'){
+                    $error= verificar_peonBlanco($Fi,$Fd,$Ci,$Cd);
+                    echo 'verifica peon blanco  ';
+                }
+                else{
+                    $error= verificar_peonNegro($Fi,$Fd,$Ci,$Cd);
+                    echo 'verifica peon negro  ';
+                }
             }
         }
         //Si es legal modificar_jugada($posInicial,$posFinal,$pieza_id);
         // si no es legal, deshacer el movimiento, lanzar un mensaje y volver a movimientos
-       
+        
         if ($error==0){
             // modifica jugada poniendo posFinal
             
@@ -96,7 +103,7 @@
             $fila=$posicion['fila'];
             $columna=$posicion['columna'];
             $pieza_id=0;
-            //echo $posicion_id,'-',$pieza_id,'-',$fila,'-',$columna,'----';
+            
             modificar_posicion($posicion_id,$pieza_id,$fila,$columna,$marca);
             
             
@@ -105,7 +112,7 @@
             $fila=$filaF;
             $columna=$columnaF;
             $pieza_id=$p;
-            //echo $posicion_id,'-',$pieza_id,'-',$fila,'-',$columna,'----';
+            
             modificar_posicion($posicion_id,$pieza_id,$fila,$columna,$marca);
             $mensaje = 'movimiento legal';
            

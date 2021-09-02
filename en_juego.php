@@ -26,6 +26,12 @@
 
         <div class="cajas">
             <h2>
+                <a class="enlaces" href="colocar_piezas_inicio.php">Colocar piezas inicio</a>
+            </h2>
+        </div>
+
+        <div class="cajas">
+            <h2>
                 <a class="enlaces" href="mostrar_posiciones.php">Mostrar posiciones</a>
             </h2>
         </div>
