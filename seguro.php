@@ -17,8 +17,7 @@
 
         // este programa trae la posicion de salida de la pieza
         $error = 0;
-        $corona=' '; //para indicar que un peon ha coronado
-        $pc=' '; // para identificar el color del peon coronado
+        $corona=' ';
         
         $n=$_GET['n'];
         $posFinal= $n;
@@ -84,7 +83,6 @@
                     
                     if ($error==0 && $Fd==8){
                         $corona= 'peon coronado, cambia pieza';
-                        $pc='b';
                     }
                 }
                 else{
@@ -92,7 +90,6 @@
                    
                     if ($error==0 && $Fd==1){
                         $corona= 'peon coronado, cambia pieza';
-                        $pc='n';
                     }
                 }
             }
@@ -103,8 +100,7 @@
         if ($error==0){
             // modifica jugada poniendo posFinal
             
-            modificar_jugada($jugada_id,$posInicial,$posFinal,$pieza_id);
-            $corona=' ';     
+            modificar_jugada($jugada_id,$posInicial,$posFinal,$pieza_id);     
             
             //modificar posicion salida (quitar la pieza)
             $posicion_id= $posInicial;
@@ -123,40 +119,13 @@
             $fila=$filaF;
             $columna=$columnaF;
             $pieza_id=$p;
+            // si es un peon que ha coronado cambiar pieza
+
+
             
-            //si es un peon que ha coronado cambiar pieza
-            
-            if ($pc!=' '){
-                ?>
-                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <input required type="text" name="cambio" placeholder="elija Dama=D, Caballo=C" />
-                <button name="cambioPieza" class="botonEnviar" type="submit">Enviar</button>
-                </form>
-                <?php
-                echo 'control  '; //-----------------control
-                if (isset($_POST['cambioPieza'])) {
-                    $cambio=$_POST['cambioPieza'];
-                    echo $cambio;//-----------------control
-                    if ($cambio=='D' && $pc=='b'){
-                        $pieza_id=15;
-                    }
-                    if ($cambio=='C' && $pc=='b'){
-                        $pieza_id=17;
-                    }
-                    if ($cambio=='D' && $pc=='n'){
-                        $pieza_id=31;
-                    }
-                    if ($cambio=='C' && $pc=='b'){
-                        $pieza_id=33;
-                    }
-                    
-                }
-            }
-            echo $posicion_id,' ',$pieza_id,' ', $fila,' ',$columna;//----control
             modificar_posicion($posicion_id,$pieza_id,$fila,$columna,$marca);
             $mensaje = 'movimiento legal';
-            $pc=' ';
-            
+           
         }
         else{
             
@@ -167,7 +136,7 @@
         }
            
         // vuelve a movimientos
-        
+        //header("Location: movimientos.php?id=".$n."");
         echo "<table>";
        
         $titulo = 'Inicio jugada';

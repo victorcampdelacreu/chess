@@ -454,9 +454,6 @@ else{
 }
     $error=$error1+$error2;
        
-    // no es necesario comprobar si hay pieza propia en destino
-    // porque ya se ha verificado en realizar_movDestino.php de
-    //donde se ha lanzado a funciones
 
 return $error;
 

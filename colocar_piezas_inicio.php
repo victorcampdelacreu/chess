@@ -53,31 +53,31 @@
     $pieza_id=22;
     $columna='a';
     modificar_posicion($n,$pieza_id,$fila,$columna,$marca);
-    $n=$n+1;
+    $n=50;
     $pieza_id=23;
     $columna='b';
     modificar_posicion($n,$pieza_id,$fila,$columna,$marca);
-    $n=$n+1;
+    $n=51;
     $pieza_id=24;
     $columna='c';
     modificar_posicion($n,$pieza_id,$fila,$columna,$marca);
-    $n=$n+1;
+    $n=52;
     $pieza_id=25;
     $columna='d';
     modificar_posicion($n,$pieza_id,$fila,$columna,$marca);
-    $n=$n+1;
+    $n=53;
     $pieza_id=26;
     $columna='e';
     modificar_posicion($n,$pieza_id,$fila,$columna,$marca);
-    $n=$n+1;
+    $n=54;
     $pieza_id=27;
     $columna='f';
     modificar_posicion($n,$pieza_id,$fila,$columna,$marca);
-    $n=$n+1;
+    $n=55;
     $pieza_id=28;
     $columna='g';
     modificar_posicion($n,$pieza_id,$fila,$columna,$marca);
-    $n=$n+1;
+    $n=56;
     $pieza_id=29;
     $columna='h';
     modificar_posicion($n,$pieza_id,$fila,$columna,$marca);
@@ -109,16 +109,16 @@
     $pieza_id=35;
     $columna='f';
     modificar_posicion($n,$pieza_id,$fila,$columna,$marca);
-    $n=$n+1;
+    $n=7;
     $pieza_id=36;
     $columna='g';
     modificar_posicion($n,$pieza_id,$fila,$columna,$marca);
-    $n=$n+1;
+    $n=8;
     $pieza_id=37;
     $columna='h';
     modificar_posicion($n,$pieza_id,$fila,$columna,$marca);
     // coloca peones negros
-    $n=$n+1;
+    $n=9;
     $fila=2;
     $pieza_id=38;
     $columna='a';
@@ -151,8 +151,22 @@
     $pieza_id=45;
     $columna='h';
     modificar_posicion($n,$pieza_id,$fila,$columna,$marca);
-    $n=$n+1;
-    
+   
+    // coloca los espacios vacios (filas 3 a 6)
+    for($n=17;$n<49;$n++){
+        $id=$n;
+        $pos = buscar_posicion($id);
+      
+        
+        $j= $pos['columna'];
+        $i= $pos['fila'];
+        $pieza_id=0; 
+        $marca=0;
+      
+
+        modificar_posicion($id,$pieza_id,$i,$j,$marca);   
+        
+    }
 
 
 
