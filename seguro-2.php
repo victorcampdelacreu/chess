@@ -18,7 +18,7 @@
         // este programa trae la posicion de salida de la pieza
         $error = 0;
         $corona=' '; //para indicar que un peon ha coronado
-        $pc='x'; // para identificar el color del peon coronado
+        $pc=' '; // para identificar el color del peon coronado
         
         $n=$_GET['n'];
         $posFinal= $n;
@@ -123,20 +123,44 @@
             $fila=$filaF;
             $columna=$columnaF;
             $pieza_id=$p;
-            $cambio='%'; //  coloca % para dar un valor a $cambio que no sea " "
+            
             //si es un peon que ha coronado cambiar pieza
             
-            if ($pc!='x'){
+            if ($pc!=' '){
+                ?>
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 
-                $m=corona($pieza_id,$pc);
-                $pieza_id=$m;
-                echo ' return: ',$m;
-                echo die;
+                <input required type="text" name="cambio" placeholder="elija Dama=D, Caballo=C" />
+                <button name="formularioCambio" class="botonEnviar" type="submit">Enviar</button>
+                <form action="action.php" method="POST">
+                <!--<p>input type="text" name="cambio" placeholder="elija Dama=D, Caballo=C  /></p>
+                <p>input type>="submit" /></p>-->
+                </form>
+                <?php
                 
+                if (isset($_POST['formularioCambio'])) {
+                    $cambio=$_POST['cambio'];
+                    
+                    if ($cambio=='D' && $pc=='b'){
+                        $pieza_id=15;
+                    }
+                    if ($cambio=='C' && $pc=='b'){
+                        $pieza_id=17;
+                    }
+                    if ($cambio=='D' && $pc=='n'){
+                        $pieza_id=31;
+                    }
+                    if ($cambio=='C' && $pc=='b'){
+                        $pieza_id=33;
+                    }
+                    
+                }
             }
+            echo $posicion_id,' ',$pieza_id,' ', $fila,' ',$columna;//----control
+            //echo die; // -----control
             modificar_posicion($posicion_id,$pieza_id,$fila,$columna,$marca);
             $mensaje = 'movimiento legal';
-            $pc='x';
+            $pc=' ';
             
         }
         else{

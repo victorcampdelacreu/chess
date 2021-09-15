@@ -54,6 +54,28 @@ function mira_pieza($Fk,$Ck){ //mira si hay una pieza en la posicion
 return $error2;    
 }
 //***************************************************** */
+function insertar_piezaCambio($cambio)
+{
+    $query = "INSERT INTO piezasCambio(cambio) VALUES ('$cambio')";
+    $result = mysqli_query(OpenCon(), $query);
+    return true;
+}
+
+function listar_piezasCambio()
+{
+    $sql = "SELECT * FROM piezasCambio";
+    $result = mysqli_query(OpenCon(), $sql);
+    return $result;
+}
+
+
+function eliminar_piezaCambio($id)
+{
+    $query = "DELETE FROM piezasCambio WHERE id = '$id'";
+    $result = mysqli_query(OpenCon(), $query);
+    return true;
+}
+//***************************************************** */
 function insertar_posicion($pieza_id, $fila,$columna,$marca)
 {
     $query = "INSERT INTO posicion(pieza_id,fila,columna,marca) VALUES ($pieza_id, $fila,'$columna',$marca)";
@@ -416,7 +438,9 @@ function verificar_peonBlanco($Fi,$Fd,$Ci,$Cd){
         if ($Fi>2){ // verifica que no avanza mas de 1 si no esta en posicion fila 2
             if($Fd>$Fi+1){
                 $error1=1;
+                
             }
+            $error2=mira_pieza($Fi+1,$Ci);//verifica que no hay pieza en fila siguiente
         }
         if ($Fi==2){
             if($Fd>$Fi+2){ //verifica que no avanza mas de 2
@@ -468,7 +492,9 @@ function verificar_peonNegro($Fi,$Fd,$Ci,$Cd){
         if ($Fi<7){ // verifica que no avanza mas de 1 si no esta en posicion fila 2
             if($Fd<$Fi-1){
                 $error1=1;
+                
             }
+            $error2=mira_pieza($Fi-1,$Ci);//verifica que no hay pieza en fila siguiente
         }
         if ($Fi==7){
             if($Fd<5){ //verifica que no avanza mas de 2
@@ -515,6 +541,43 @@ return $error;
 
 }
 
+//************************************************** */
+function corona($m,$pc){
+    $cambio=' ';
+    
+    ?>
+               
+                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                
+                <input required type="text" name="cambio" placeholder="elija Dama=D, Caballo=C" />
+                
+                <button name="formularioC" class="botonEnviar" type="submit">Enviar</button>
+                
+                </form>
+                <?php 
+                echo $pc,' ';
+                
+                if (isset($_POST['formularioC'])) {
+                    $cambio = $_POST['cambio'];
+                    }                  
+                    if ($cambio=='D' && $pc=='b'){
+                        $m=15;   
+                    }
+                    if ($cambio=='C' && $pc=='b'){
+                        $m=17;
+                    }
+                    if ($cambio=='D' && $pc=='n'){
+                        $m=31;
+                    }
+                    if ($cambio=='C' && $pc=='n'){
+                        $m=33;
+                    }
+                    
+
+
+    return $m;
+
+}
 
 
 

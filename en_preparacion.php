@@ -15,13 +15,18 @@
     <div class="cajasMenu">
         
        
-        <div class="cajasMenu">
+        
         
          
 
         <div class="cajas">
             <h2>
                 <a class="enlaces" href="en_piezas.php">Entrar piezas</a>
+            </h2>
+        </div>
+        <div class="cajas">
+            <h2>
+                <a class="enlaces" href="en_piezasCambio.php">Entrar piezas CAMBIO</a>
             </h2>
         </div>
         <div class="cajas">
@@ -37,7 +42,7 @@
 
         <div class="cajas">
             <h2>
-                <a class="enlaces" href="crear_tablero.php">Crear tablero tablero (no usar)</a>
+                <a class="enlaces" href="crear_tablero.php">Crear tablero (no usar)</a>
             </h2>
         </div>
 
@@ -46,6 +51,8 @@
                 <a class="enlaces" href="posicionesPoner_a_cero.php">Poner posiciones a cero</a>
             </h2>
         </div>
+</div>
+<div class="cajasMenu">
         
         <div class="cajas">
             <h2>
@@ -56,6 +63,11 @@
         <div class="cajas">
             <h2>
                 <a class="enlaces" href="en_tableroPiezas.php">Ver tablero con piezas</a>
+            </h2>
+        </div>
+        <div class="cajas">
+            <h2>
+                <a class="enlaces" href="prueba.php">Pruebas</a>
             </h2>
         </div>
     </div>
