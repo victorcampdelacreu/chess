@@ -100,7 +100,7 @@
         //Si es legal modificar_jugada($posInicial,$posFinal,$pieza_id);
         // si no es legal, deshacer el movimiento, lanzar un mensaje y volver a movimientos
         
-        if ($error==0){
+    if ($error==0){
             // modifica jugada poniendo posFinal
             
             modificar_jugada($jugada_id,$posInicial,$posFinal,$pieza_id);
@@ -116,8 +116,7 @@
             $pieza_id=0;
             
             modificar_posicion($posicion_id,$pieza_id,$fila,$columna,$marca);
-            
-            
+                        
             //modificar posicion llegada (poner pieza)
             $posicion_id=$posFinal;
             $fila=$filaF;
@@ -127,35 +126,57 @@
             //si es un peon que ha coronado cambiar pieza
             
             if ($pc!='x'){
-                
-                $m=corona($pieza_id,$pc);
-                $pieza_id=$m;
-                echo ' return: ',$m;
-                echo die;
-                
+            ?>    
+            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+
+            <input required type="text" name="cambio" placeholder="elija Dama=D, Caballo=C" />
+
+            <button name="formularioC" class="botonEnviar" type="submit">Enviar</button>
+
+        </form>
+        <?php
+            echo $pc . ' '; // --------------------------------------------
+            $m=0;
+
+            if (isset($_POST['formularioC'])) {
+                $cambio = $_POST['cambio'];
             }
-            modificar_posicion($posicion_id,$pieza_id,$fila,$columna,$marca);
-            $mensaje = 'movimiento legal';
-            $pc='x';
-            
-        }
-        else{
-            
-            $mensaje = 'movimiento ilegal, volver a movimientos';
-            if ($mens == 1){
-                $mensaje= 'hay una pieza propia en destino, volver a movimientos';
+            if ($cambio == 'D' && $pc == 'b') {
+                $m = 15;
             }
-        }
+            if ($cambio == 'C' && $pc == 'b') {
+                $m = 17;
+            }
+            if ($cambio == 'D' && $pc == 'n') {
+                $m = 31;
+            }
+            if ($cambio == 'C' && $pc == 'n') {
+                $m = 33;
+            }
+            echo ' '.$m.' '.$cambio;//-------------------------------------------
+            $pieza_id=$m;           
+                    
+                }
+                modificar_posicion($posicion_id,$pieza_id,$fila,$columna,$marca);
+                $mensaje = 'movimiento legal';
+                $pc='x';    
+            }
+            else{   
+                $mensaje = 'movimiento ilegal, volver a movimientos';
+                if ($mens == 1){
+                    $mensaje= 'hay una pieza propia en destino, volver a movimientos';
+                }
+            }
            
-        // vuelve a movimientos
+            // vuelve a movimientos
+            
+            echo "<table>";
         
-        echo "<table>";
-       
-        $titulo = 'Inicio jugada';
-        echo "<td class= 'cajas'>".$mensaje.'</td>';
-        echo "<td class= 'cajas'>".$corona.'</td>';
-        echo "</table>";
-    ?>
+            $titulo = 'Inicio jugada';
+            echo "<td class= 'cajas'>".$mensaje.'</td>';
+            echo "<td class= 'cajas'>".$corona.'</td>';
+            echo "</table>";
+        ?>
       <div class="cajas">
        <h2>
            <a class="enlaces" href="movimientos.php">Nuevo movimiento</a>

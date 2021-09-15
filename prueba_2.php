@@ -10,23 +10,24 @@
 </head>
 
 <body>
-<?php 
-       require('funciones.php');
-       
-
-        $cambio= $_POST['cambio'];
-        
-        echo '  pieza  ',$cambio;
-        
+    <?php
+    require('funciones.php');
 
 
-        ?>   
-<div class="cajas">
-       <h2>
-           <a class="enlaces" href="en_preparacion.php?$cambio">Ir a Preparacion juego</a>
-       </h2>
-   </div>  
+    $cambio = $_GET['cambio'];
+
+    echo '  pieza  ', $cambio;
+
+
+
+    ?>
+    <div class="cajas">
+        <h2>
+            <a class="enlaces" href="en_preparacion.php?$cambio">Ir a Preparacion juego</a>
+        </h2>
+    </div>
 
 
 </body>
+
 </html>
